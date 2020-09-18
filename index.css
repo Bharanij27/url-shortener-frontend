@@ -1,0 +1,47 @@
+body {
+    background-image: url('./image/38191.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.main-content{
+    margin: auto;
+    margin-top: 130px;
+    padding: 0;
+}
+
+.modal-content{
+    background-color: #676f77;
+    opacity: 0.82;
+    padding: 0 18px;
+    border-radius: 10px;
+    border: thin;
+}
+
+.icon-img img{
+    height: 120px;
+    width: 120px;
+}
+
+.icon-img{
+    margin-top: -60px;
+    margin-bottom: 45px;
+    position: relative;
+    background-color: transparent;
+}
+
+form-group input{
+    height: 40px;
+    border-radius: 5px;
+    border: 0;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    padding-left: 50px;
+}
+
+.f-pass{
+    color: white !important;
+    font-weight: normal;
+    text-decoration: underline;
+}
