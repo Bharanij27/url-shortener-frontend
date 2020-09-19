@@ -18,12 +18,14 @@
     </nav>
     <div class="container mt-3">
         <div class="row">
-            <table class="table">
+            <div class="info">Here you can see the tinii link u had created and number of times it has been visited</div>
+            <table class="table text-sm-center">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Original Link</th>
                         <th scope="col">Short URL</th>
+                        <th scope="col">Visited</th>
                     </tr>
                 </thead>
                 <tbody class="links">
@@ -66,21 +68,29 @@
 
             let tbody = document.getElementsByClassName('links')[0]
             for(let i = 0; i < urls.length; i++){
+                let tr = document.createElement('tr');
                 let th = document.createElement('th');
+                th.innerText = i + 1
                 th.scope = 'row';
 
-                let fullLink = tableDesc(urls[i].fullURL);
-                let shortLink = tableDesc(urls[i].shortURL);
+                let fullLink = tableDesc(urls[i].fullURL, true);
+                let shortLink = tableDesc(urls[i].shortURL, true);
                 let count = tableDesc(urls[i].count);
 
-                th.append(fullLink, shortLink, count);
-                tbody.append(th);
+                tr.append(th, fullLink, shortLink, count);
+                tbody.append(tr);
             }
         }
 
-        function tableDesc(data){
+        function logout(){
+            localStorage.setItem('c_user', null);
+            window.location.assign('/')
+        }
+        
+        function tableDesc(data, isLink){
             let td = document.createElement('td');
-            td.innerText = data;
+            if(isLink) td.innerHTML = `<a href=${data}>${data}</a>`;
+            else td.innerText = data;
             return td;
         }
     </script>
