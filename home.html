@@ -44,12 +44,13 @@
         let copyText = document.getElementById("short-url");
 
         async function getTinyURl() {
-            debugger;
+            let token = localStorage.getItem('c_user');
             let fullURL = document.getElementById('fullURL').value;
             let fetchData = await fetch(`https://tinii-url.herokuapp.com/generateURL/`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    fullURL
+                    fullURL,
+                    token
                 }),
                 headers: {
                     "Content-Type": "application/json",
