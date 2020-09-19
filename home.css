@@ -5,6 +5,30 @@ body {
     background-size: cover;
 }
 
+nav a{
+    max-width: fit-content !important;
+    background-color: transparent !important;
+    color: black !important;
+    font-weight: 500 !important;
+    font-size: 20px;
+}
+
+nav a.active{
+    color: #007bff !important;
+}
+
+nav a.active:hover {
+    background-color: #007bff !important;
+    color: white !important;
+}
+
+nav a:hover {
+    background-color: rgb(75, 73, 73) !important;
+    color: white !important;
+}
+
+
+
 .content{
     margin: auto;
     margin-top: 15%;

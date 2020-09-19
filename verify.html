@@ -29,7 +29,13 @@
                 let result = await isValidToken.json()
                 if (result.status === 200) {
                     alert(result.message);
-                    (urlParam === 'verification') ? window.location.assign('/newpass.html') : window.location.assign('/home.html');
+                    if(urlParam === 'verification') {
+                        window.location.assign('/newpass.html');
+                    } 
+                    else {
+                        localStorage.setItem('c_user', result.token)
+                        window.location.assign('/home.html');
+                    }
                 } else {
                     document.body.innerText = JSON.stringify(result);
                 }
