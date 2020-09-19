@@ -14,7 +14,7 @@
         let secretKey = url.substring(url.indexOf('=') + 1, url.length);
         
         async function activate(urlParam) {
-            debugger
+            
             let activationKey = window.location.href.split('=')[1];
             if (activationKey) {
                 let isValidToken = await fetch(`https://tinii-url.herokuapp.com/account/${urlParam}`, {
