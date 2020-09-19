@@ -84,7 +84,7 @@
                         "Content-Type": "application/json",
                     },
                 });
-                let result = isValidUser.json();
+                let result = await isValidUser.json();
                 if (result.status !== 200) {
                     console.log(result);
                     alert('Please login to access');
