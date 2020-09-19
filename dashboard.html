@@ -60,11 +60,11 @@
 
         function createTable(){
             if(urls.length === 0) {
-                document.getElementsByClassName('no-data')[0].innerText = 'NO Data Available'
+                document.getElementsByClassName('no-data')[0].innerText = 'No Data Available'
                 return;
             }
 
-            let tbody = document.getElementsByClassName('links')
+            let tbody = document.getElementsByClassName('links')[0]
             for(let i = 0; i < urls.length; i++){
                 let th = document.createElement('th');
                 th.scope = 'row';
