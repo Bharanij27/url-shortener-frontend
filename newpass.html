@@ -81,7 +81,7 @@
             let logResult = await user.json();
             if (logResult.status === 200) {
                 alert("Password Updated Succesfully...Please LogIn");
-                window.location.assign('/index.html')
+                window.location.assign('/')
                 return true;
             }
             alert(logResult.message);

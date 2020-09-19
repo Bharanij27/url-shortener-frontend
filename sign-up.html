@@ -90,7 +90,7 @@
             let res = await newUser.json();
             if(res.status === 200){
                 alert("Activation link sent to your e-mail")
-                window.location.assign('/index.html')
+                window.location.assign('/')
                 return true;
             }
             alert(res.message);
