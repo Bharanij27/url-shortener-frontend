@@ -58,7 +58,7 @@
             let email = document.getElementById('user-email').value;
             let pass = document.getElementById('user-pass').value;
 
-            let user = await fetch('http://localhost:3000/login', {
+            let user = await fetch('https://tinii-url.herokuapp.com/login', {
                 method: "POST",
                 body: JSON.stringify({
                     email,

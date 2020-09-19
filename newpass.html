@@ -67,7 +67,7 @@
                 return false;
             }
 
-            let user = await fetch('http://localhost:3000/account/changePassword', {
+            let user = await fetch('https://tinii-url.herokuapp.com/account/changePassword', {
                 method: "POST",
                 body: JSON.stringify({
                     email,

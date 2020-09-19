@@ -17,7 +17,7 @@
             debugger
             let activationKey = window.location.href.split('=')[1];
             if (activationKey) {
-                let isValidToken = await fetch(`http://localhost:3000/account/${urlParam}`, {
+                let isValidToken = await fetch(`https://tinii-url.herokuapp.com/account/${urlParam}`, {
                     method: "PUT",
                     body: JSON.stringify({
                         secretKey

@@ -41,7 +41,7 @@
 
         async function getTinyURl() {
             let fullURL = document.getElementById('fullURL').value;
-            let fetchData = await fetch(`http://localhost:3000/generateURL/`,{
+            let fetchData = await fetch(`https://tinii-url.herokuapp.com/generateURL/`,{
                 method : 'POST',
                 body: JSON.stringify({
                     fullURL
