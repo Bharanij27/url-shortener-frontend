@@ -7,7 +7,8 @@
     <title>URL Shortener</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="index.css">
+</head>
+<link rel="stylesheet" href="index.css">
 </head>
 
 <body>
@@ -18,7 +19,7 @@
                     <img src="./image/user.png" alt="user-icon">
                 </div>
                 <div class="col-12 form-input">
-                    <form onsubmit="loginProcess(); return false;">
+                    <form onsubmit="changePassword();return false;">
                         <div class="input-group mb-2 mr-sm-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -35,17 +36,20 @@
                                 </div>
                             </div>
                             <input type="password" class="form-control" name="pass" id="user-pass"
-                                placeholder="Enter Password" required>
+                                placeholder="Enter New Password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary ">Login</button>
+
+                        <div class="input-group mb-3 mr-sm-2 mt-4">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                            </div>
+                            <input type="password" class="form-control" name="cpass" id="c-user-pass"
+                                placeholder="Confirm Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary ">Change Password</button>
                     </form>
-                </div>
-                <div class="col-12 mt-3">
-                    <a href="./reset.html" class="f-pass">Forgot Password ?</a>
-                </div>
-                <div class="col-12 mt-3">
-                    <span class="f-pass" style="text-decoration: none;">New User?</span>
-                    <a href="./sign-up.html" class="f-pass">Sign Up</a>
                 </div>
                 <br>
             </div>
@@ -53,12 +57,17 @@
     </div>
 
     <script>
-        async function loginProcess() {
-            event.preventDefault();
+        async function changePassword(){
+            debugger
             let email = document.getElementById('user-email').value;
             let pass = document.getElementById('user-pass').value;
+            let cpass = document.getElementById('c-user-pass').value;
+            if(cpass !== pass) {
+                alert('Both wntered passwords should be same');
+                return false;
+            }
 
-            let user = await fetch('http://localhost:3000/login', {
+            let user = await fetch('http://localhost:3000/account/changePassword', {
                 method: "POST",
                 body: JSON.stringify({
                     email,
@@ -71,10 +80,8 @@
 
             let logResult = await user.json();
             if (logResult.status === 200) {
-                let token = logResult.token;
-                localStorage.setItem('c_user', token);
-                alert("Logged In Successfully");
-                window.location.assign('/home.html')
+                alert("Password Updated Succesfully...Please LogIn");
+                window.location.assign('/index.html')
                 return true;
             }
             alert(logResult.message);

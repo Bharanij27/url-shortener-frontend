@@ -7,18 +7,17 @@
     <title>URL Shortener</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="index.css">
+</head>
+<link rel="stylesheet" href="index.css">
 </head>
 
 <body>
     <div class="modal-dialog text-center">
         <div class="col-sm-9 main-content">
             <div class="modal-content">
-                <div class="col-12 icon-img">
-                    <img src="./image/user.png" alt="user-icon">
-                </div>
                 <div class="col-12 form-input">
-                    <form onsubmit="loginProcess(); return false;">
+                    <br>
+                    <form onsubmit="resetPassword(); return false;">
                         <div class="input-group mb-2 mr-sm-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -26,26 +25,14 @@
                                 </div>
                             </div>
                             <input type="email" class="form-control" name="email" id="user-email"
-                                placeholder="Enter E-mail" required>
+                                placeholder="Enter Registered E-mail Address" required>
                         </div>
-                        <div class="input-group mb-3 mr-sm-2 mt-4">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fa fa-lock"></i>
-                                </div>
-                            </div>
-                            <input type="password" class="form-control" name="pass" id="user-pass"
-                                placeholder="Enter Password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary ">Login</button>
+                        <button type="submit" class="btn btn-primary mt-3">Reset</button>
                     </form>
                 </div>
                 <div class="col-12 mt-3">
-                    <a href="./reset.html" class="f-pass">Forgot Password ?</a>
-                </div>
-                <div class="col-12 mt-3">
-                    <span class="f-pass" style="text-decoration: none;">New User?</span>
-                    <a href="./sign-up.html" class="f-pass">Sign Up</a>
+                    <span class="f-pass" style="text-decoration: none;">Remember Now?</span>
+                    <a href="./login.html" class="f-pass">Login</a>
                 </div>
                 <br>
             </div>
@@ -53,16 +40,14 @@
     </div>
 
     <script>
-        async function loginProcess() {
+        async function resetPassword() {
             event.preventDefault();
             let email = document.getElementById('user-email').value;
-            let pass = document.getElementById('user-pass').value;
 
-            let user = await fetch('http://localhost:3000/login', {
+            let user = await fetch('http://localhost:3000/account/reset', {
                 method: "POST",
                 body: JSON.stringify({
-                    email,
-                    pass
+                    email
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -71,13 +56,9 @@
 
             let logResult = await user.json();
             if (logResult.status === 200) {
-                let token = logResult.token;
-                localStorage.setItem('c_user', token);
-                alert("Logged In Successfully");
-                window.location.assign('/home.html')
-                return true;
+                alert("Password Rest link sent to your e-mail");
             }
-            alert(logResult.message);
+            else alert(logResult.message);
             return false;
         }
     </script>

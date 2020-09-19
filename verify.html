@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+</head>
+
+<body>
+    <script>
+        let url = window.location.href
+        let urlParam = url.substring(url.indexOf('?') + 1, url.lastIndexOf('?'));
+        let secretKey = url.substring(url.indexOf('=') + 1, url.length);
+        
+        async function activate(urlParam) {
+            debugger
+            let activationKey = window.location.href.split('=')[1];
+            if (activationKey) {
+                let isValidToken = await fetch(`http://localhost:3000/account/${urlParam}`, {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        secretKey
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+                let result = await isValidToken.json()
+                if (result.status === 200) {
+                    alert(result.message);
+                    (urlParam === 'verification') ? window.location.assign('/newpass.html') : window.location.assign('/home.html');
+                } else {
+                    document.body.innerText = JSON.stringify(result);
+                }
+            }
+        }
+
+        activate(urlParam);
+    </script>
+</body>
+
+</html>
