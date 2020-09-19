@@ -27,7 +27,9 @@ nav a:hover {
     color: white !important;
 }
 
-
+nav .logout:hover{
+    background-color: #dc3545 !important;
+}
 
 .content{
     margin: auto;

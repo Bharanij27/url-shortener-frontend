@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <nav class="nav nav-pills flex-column flex-sm-row ml-5 mt-2">
+        <a class="flex-sm-fill text-sm-center nav-link" href="./home.html">Home</a>
+        <a class="flex-sm-fill text-sm-center nav-link  active" href="./dashboard.html">Dashboard</a>
+        <a class="flex-sm-fill text-sm-center nav-link logout" onclick="logout();" href="#">Logout</a>
+    </nav>
+    <div class="container mt-3">
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Original Link</th>
+                        <th scope="col">Short URL</th>
+                    </tr>
+                </thead>
+                <tbody class="links">
+                </tbody>
+            </table>
+            <span class="no-data"></span>
+        </div>
+    </div>
+    <script>
+        let token = localStorage.getItem('c_user');
+        let urls;
+        (async function init() {
+            if (token) {
+                let all = true
+                let isValidUser = await fetch(`https://tinii-url.herokuapp.com/validate`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        token,
+                        all
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+                let result = await isValidUser.json();
+                if (result.status !== 200) {
+                    alert('Please login to access');
+                    window.location.assign('/');
+                }
+                urls = result.data
+                createTable(urls);
+            }
+        })();
+
+        function createTable(){
+            if(urls.length === 0) {
+                document.getElementsByClassName('no-data')[0].innerText = 'NO Data Available'
+                return;
+            }
+
+            let tbody = document.getElementsByClassName('links')
+            for(let i = 0; i < urls.length; i++){
+                let th = document.createElement('th');
+                th.scope = 'row';
+
+                let fullLink = tableDesc(urls[i].fullURL);
+                let shortLink = tableDesc(urls[i].shortURL);
+                let count = tableDesc(urls[i].count);
+
+                th.append(fullLink, shortLink, count);
+                tbody.append(th);
+            }
+        }
+
+        function tableDesc(){
+            let td = document.createElement('td');
+            td.innerText = data;
+            return td;
+        }
+    </script>
+</body>
+
+</html>
