@@ -20,15 +20,6 @@
                 </div>
                 <div class="col-12 form-input">
                     <form onsubmit="changePassword();return false;">
-                        <div class="input-group mb-2 mr-sm-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fa fa-at"></i>
-                                </div>
-                            </div>
-                            <input type="email" class="form-control" name="email" id="user-email"
-                                placeholder="Enter E-mail" required>
-                        </div>
                         <div class="input-group mb-3 mr-sm-2 mt-4">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -59,7 +50,7 @@
     <script>
         async function changePassword(){
             
-            let email = document.getElementById('user-email').value;
+            let token = localStorage.setItem('c_user');
             let pass = document.getElementById('user-pass').value;
             let cpass = document.getElementById('c-user-pass').value;
             if(cpass !== pass) {
@@ -70,7 +61,7 @@
             let user = await fetch('https://tinii-url.herokuapp.com/account/changePassword', {
                 method: "POST",
                 body: JSON.stringify({
-                    email,
+                    token,
                     pass
                 }),
                 headers: {
