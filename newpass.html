@@ -48,11 +48,15 @@
     </div>
 
     <script>
+            let reset = localStorage.getItem('reset');
+            if(!reset) window.location.assign('/');
+            
         async function changePassword(){
             
             let token = localStorage.setItem('c_user');
             let pass = document.getElementById('user-pass').value;
             let cpass = document.getElementById('c-user-pass').value;
+
             if(cpass !== pass) {
                 alert('Both wntered passwords should be same');
                 return false;
