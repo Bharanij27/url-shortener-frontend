@@ -57,6 +57,7 @@
             let logResult = await user.json();
             if (logResult.status === 200) {
                 localStorage.setItem('reset', true);
+                localStorage.setItem('email', email);
                 alert("Password Rest link sent to your e-mail");
             }
             else alert(logResult.message);
