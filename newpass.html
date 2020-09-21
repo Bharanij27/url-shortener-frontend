@@ -53,7 +53,7 @@
 
         async function changePassword() {
 
-            let token = localStorage.setItem('c_user');
+            let token = localStorage.getItem('c_user');
             let pass = document.getElementById('user-pass').value;
             let cpass = document.getElementById('c-user-pass').value;
 
