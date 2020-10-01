@@ -59,6 +59,7 @@
                 },
             });
             let result = await fetchData.json();
+            if(result.status === 304) alert('Tinii Url already created...');
             copyText.value = result.shortURL;
             output.style.display = 'flex';
         }
